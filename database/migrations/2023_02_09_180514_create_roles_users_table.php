@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('roles_users', function (Blueprint $table) {
+        Schema::create('role_users', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
             $table->foreignId('role_id')->nullable()->constrained('roles')->onDelete('set null');
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('roles_users');
+        Schema::dropIfExists('role_users');
     }
 };

@@ -6,6 +6,14 @@ use App\Models\User;
 
 class UserObserver
 {
+
+    /**
+     * Handle events after all transactions are committed.
+     *
+     * @var bool
+     */
+    public $afterCommit = true;
+
     /**
      * Handle the User "created" event.
      *
@@ -14,7 +22,8 @@ class UserObserver
      */
     public function created(User $user)
     {
-        //
+        $data = ['role_id'=>2];
+        $user->role()->create($data);
     }
 
     /**

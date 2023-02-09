@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+use App\Observers\UserObserver;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -19,6 +21,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'uuid',
         'email',
         'password',
     ];
@@ -42,7 +45,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function role(){
+    public function role_direct()
+    {
 		return $this->hasOneThrough(Role::class, Role_user::class); 
+    }
+
+    public function role() {
+        return $this->hasOne(Role_user::class, 'user_id');
     }
 }
