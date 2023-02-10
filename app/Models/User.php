@@ -24,6 +24,7 @@ class User extends Authenticatable
         'uuid',
         'email',
         'password',
+        'status_id'
     ];
 
     /**
@@ -50,7 +51,18 @@ class User extends Authenticatable
 		return $this->hasOneThrough(Role::class, Role_user::class); 
     }
 
-    public function role() {
+    public function role() 
+    {
         return $this->hasOne(Role_user::class, 'user_id');
+    }
+
+    public function status()
+    {
+		return $this->hasOne(Status::class); 
+    }
+
+    public function favorites()
+    {
+		return $this->hasMany(Favorite::class, 'user_id'); 
     }
 }
