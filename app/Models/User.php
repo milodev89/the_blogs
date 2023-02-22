@@ -65,4 +65,13 @@ class User extends Authenticatable
     {
 		return $this->hasMany(Favorite::class, 'user_id'); 
     }
+
+    public function posts()
+    {
+		return $this->hasMany(Post::class, 'user_id'); 
+    }
+
+    public function isAdmin() {
+        return $this->role()->where('role_id', '1')->exists();
+     }
 }

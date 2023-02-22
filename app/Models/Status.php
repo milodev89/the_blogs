@@ -9,6 +9,8 @@ class Status extends Model
 {
     use HasFactory;
 
+    public $timestamps = true;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -19,4 +21,14 @@ class Status extends Model
     protected $fillable = [
         'name', 'table'
     ];
+
+    public function scopeDraft($query)
+    {
+        return $query->where('name', 'Draft');
+    }
+
+    public function scopePosted($query)
+    {
+        return $query->where('name', 'Posted');
+    }
 }
